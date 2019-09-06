@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1567560288 source:c:\users\danie\desktop\facultad\prog_lab\tp_1\bulacio.c
+1567733174 source:c:\users\danie\desktop\facultad\prog_lab\tp_1\bulacio.c
 	"bulacio.h"
 
 1567554822 c:\users\danie\desktop\facultad\prog_lab\tp_1\bulacio.h
 
-1567560067 source:c:\users\danie\desktop\facultad\prog_lab\tp_1\main.c
+1567733105 source:c:\users\danie\desktop\facultad\prog_lab\tp_1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"bulacio.h"

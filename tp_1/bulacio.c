@@ -67,10 +67,13 @@ float dividir(int a, int b){
  *
  */
 int factorialA(int a){
-    int resultado = 1;
+    int resultado = 0;
 
-    for(int i = a ; i > 0 ; i--){
-        resultado *= i;
+    if(a > 0){
+        resultado++;
+        for(int i = a ; i > 0 ; i--){
+            resultado *= i;
+        }
     }
 
     return resultado;
@@ -82,11 +85,14 @@ int factorialA(int a){
  * \return int factorial del numero ingresado
  *
  */
-int factorialB(int b){  // funcion recursiva
-    int resultado = 1;
+int factorialB(int b){
+    int resultado = 0;
 
-    if(b > 1){
-        resultado = b * factorialB(b - 1);
+    if(b > 0){
+        resultado++;
+        for(int i = b ; i > 0 ; i--){
+            resultado *= i;
+        }
     }
 
     return resultado;

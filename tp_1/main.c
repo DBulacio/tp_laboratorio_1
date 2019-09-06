@@ -10,7 +10,7 @@ int main()
     int num1 = 0, num2 = 0;
     int rSum, rRes, rMult, rFactA, rFactB;
     float rDiv;
-    int flag1 = 0, flag2 = 0, fSuma = 0, fResta = 0, fMult = 0, fDiv = 0, fFactA = 0, fFactB = 0;
+    int flag1 = 0, flag2 = 0, fSuma = 0, fResta = 0, fMult = 0, fDiv = 0, fFact = 0;
 
     do {
         switch(menu(num1, num2, flag1, flag2)){
@@ -40,6 +40,7 @@ int main()
                             fResta = 1;
                             break;
                         case 'c':
+                            // si hacen la division con b = 0, forzamos a que lo cambie
                             if(num2 != 0){
                                 rDiv = dividir(num1, num2);
                                 fDiv = 1;
@@ -53,11 +54,8 @@ int main()
                             break;
                         case 'e':
                             rFactA = factorialA(num1);
-                            fFactA = 1;
-                            break;
-                        case 'f':
                             rFactB = factorialB(num2);
-                            fFactB = 1;
+                            fFact = 1;
                             break;
                         default:
                             printf("ERROR: elija una operacion valida\n");
@@ -71,47 +69,50 @@ int main()
                 printf("Seleccione el resultado a mostrar: ");
                 fflush(stdin);
                 char option = getchar();
+                // menu de resultados
                 switch(option){
                     case 'a':
                         if(fSuma == 1){
                            printf("El resultado de la suma es: %d\n", rSum);
                         } else {
-                            printf("Tiene que realizar la suma para ver el rusltado.\n");
+                            printf("Tiene que realizar la suma para ver el resultado.\n");
                         }
                         break;
                     case 'b':
                         if(fResta == 1){
                             printf("El resultado de la resta es: %d\n", rRes);
                         } else {
-                            printf("Tiene que realizar la resta para ver el rusltado.\n");
+                            printf("Tiene que realizar la resta para ver el resultado.\n");
                         }
                         break;
                     case 'c':
                         if(fDiv == 1){
                             printf("El resultado de la division es: %f\n", rDiv);
                         } else {
-                            printf("Tiene que realizar la division para ver el rusltado.\n");
+                            printf("Tiene que realizar la division para ver el resultado.\n");
                         }
                         break;
                     case 'd':
                         if(fMult == 1){
                             printf("El resultado de la multiplicacion es: %d\n", rMult);
                         } else {
-                            printf("Tiene que realizar la multiplicacion para ver el rusltado.\n");
+                            printf("Tiene que realizar la multiplicacion para ver el resultado.\n");
                         }
                         break;
                     case 'e':
-                        if(fFactA == 1){
-                            printf("El resultado del factorial es: %d\n", rFactA);
+                        if(fFact == 1){
+                            // Si se hizo la operacion, damos un mensaje para cada resultado posible
+                            if(rFactA == 0 && rFactB > 0){
+                                printf("El factorial de A no se puede calcular y el factorial de B es: %d\n", rFactB);
+                            } else if(rFactA > 0 && rFactB == 0){
+                                printf("El factorial de A es %d y el factorial de B no se puede calcular\n", rFactA);
+                            } else if(rFactA == 0 && rFactB == 0){
+                                printf("No se puede calcular el factorial de A ni de B\n");
+                            } else {
+                            printf("El factorial de A es: %d y El factorial de B es: %d\n", rFactA, rFactB);
+                            }
                         } else {
-                            printf("Tiene que realizar la factorizacion para ver el rusltado.\n");
-                        }
-                        break;
-                    case 'f':
-                        if(fFactB == 1){
-                            printf("El resultado del factorial es: %d\n", rFactB);
-                        } else {
-                            printf("Tiene que realizar la factorizacion para ver el rusltado.\n");
+                            printf("Tiene que realizar la factorizacion para ver el resultado.\n");
                         }
                         break;
                     default:
@@ -159,15 +160,13 @@ int menu(int a, int b, int flag1, int flag2){
     printf("        b. Calcular la resta (A - B)\n");
     printf("        c. Calcular la division (A / B)\n");
     printf("        d. Calcular la multiplicacion (A * B)\n");
-    printf("        e. Calcular el factorial (A!)\n");
-    printf("        f. Calcular el factorial (B!)\n");
+    printf("        e. Calcular el factorial (A!) (B!)\n");
     printf("      4. Informar resultados\n");
     printf("        a. El resultado de A + B es: r\n");
     printf("        b. El resultado de A - B es: r\n");
     printf("        c. El resultado de A / B es: r\n");
     printf("        d. El resultado de A * B es: r\n");
-    printf("        e. El factorial de A es: r\n");
-    printf("        f. El factorial de B es: r\n");
+    printf("        e. El factorial de A es: r1 y El factorial de B es: r2\n");
     printf("      5. Salir\n");
 
     printf("Ingrese una opcion: ");
