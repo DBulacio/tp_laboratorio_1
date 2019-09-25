@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "ArrayEmployees.h"
 
 #define TAM 1000
@@ -10,16 +11,20 @@ int main()
 {
     Employee arr[TAM];
     int flag = 0;
-    int id;
+    int id = 1000;
     char salir;
     char confirm;
-    char order;
+    //char order;
+
+    initEmployees(arr, TAM);
 
     do{
         switch(menu()){
             case 1:
                 // pedir todos los datos y pasarlos por parametro
-                //addEmployee();
+                if (newEmployee(arr, TAM, id)){
+                    id++;
+                }
                 flag = 1;
                 break;
             case 2:
@@ -43,10 +48,13 @@ int main()
                 break;
             case 4:
                 if(flag == 1){
+                        /*
                     printf("¿Ascendente o descendente? (a/d)");
                     fflush(stdin);
                     scanf("%c", &order);
                     sortEmployee(arr, TAM, order);
+                    */
+                    printEmployees(arr, TAM);
                 }
                 break;
             case 5:
@@ -68,6 +76,7 @@ int main()
 }
 
 int menu(){
+    system("cls");
     int rta;
 
     printf("---BIENVENIDO AL SISTEMA---\n\n");
