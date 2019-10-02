@@ -6,58 +6,66 @@
 #define TAM 1000
 
 int menu();
+int menuInformes();
 
 int main()
 {
     Employee arr[TAM];
-    int flag = 0;
+    int flag = 1;       // Esta en 1 por testing. VOLVER A PONER EN 0!!!!!!!!%%%%%%%%%%&&&&&&&&&&&&&&
     int id = 1000;
+    int order;
     char salir;
-    char confirm;
     //char order;
 
     initEmployees(arr, TAM);
+
+    hardcodeEmployee(arr, TAM, 10);
 
     do{
         switch(menu()){
             case 1:
                 // pedir todos los datos y pasarlos por parametro
-                if (newEmployee(arr, TAM, id)){
+                if (askForEmployeeParameters(arr, TAM, id)){
                     id++;
                 }
                 flag = 1;
                 break;
             case 2:
                 if(flag == 1){
-                    printf("Ingrese la ID del empleado a modificar: ");
-                    scanf("%d", &id);
-                    findEmployeeById(arr, TAM, id);
+                    modifyEmployee(arr, TAM);
                 }
                 break;
             case 3:
                 if(flag == 1){
                     printf("Ingrese la ID del empleado a eliminar: ");
                     scanf("%d", &id);
-                    printf("¿Está seguro? (y/n): ");
-                    fflush(stdin);
-                    scanf("%c", &confirm);
-                    if(confirm == 'y'){
-                        removeEmployee(arr, TAM, id);
-                    }
+                    removeEmployee(arr, TAM, id);
                 }
                 break;
             case 4:
                 if(flag == 1){
-                        /*
-                    printf("¿Ascendente o descendente? (a/d)");
-                    fflush(stdin);
-                    scanf("%c", &order);
-                    sortEmployee(arr, TAM, order);
-                    */
                     printEmployees(arr, TAM);
                 }
                 break;
             case 5:
+                switch(menuInformes()){
+                    case 1:
+                        printf("Ingrese 0 para ascendente o 1 para descendente: ");
+                        scanf("%d", &order);
+                        sortEmployee(arr, TAM, order);
+                        break;
+                    case 2:
+                        informeSalario(arr, TAM);
+                        break;
+                    case 3:
+                        printf("Informes cancelados\n");
+                        break;
+                    default:
+                        printf("Opcion invalida! \n");
+                        break;
+                }
+                break;
+            case 6:
                 printf("¿Seguro quiere salir? (s/n) ");
                 fflush(stdin);
                 salir = getchar();
@@ -83,8 +91,23 @@ int menu(){
     printf("1. Altas\n");
     printf("2. Modificar\n");
     printf("3. Baja\n");
-    printf("4. Informar\n");
-    printf("5. Salir\n\n");
+    printf("4. Mostrar Empleados\n");
+    printf("5. Informes\n");
+    printf("6. Salir\n\n");
+
+    printf("Ingrese una opcion: ");
+    scanf("%d", &rta);
+
+    return rta;
+}
+
+int menuInformes(){
+    system("cls");
+    int rta;
+
+    printf("1. Listado de empleados por apellido y sector.\n");
+    printf("2. Total y promedio de salarios.\n");
+    printf("3. Salir.\n");
 
     printf("Ingrese una opcion: ");
     scanf("%d", &rta);
