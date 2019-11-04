@@ -7,14 +7,14 @@
 /****************************************************
     Menu:
      1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
-     2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
+     2. Cargar los datos de los empleados desde el archivo data.bin (modo binario).
      3. Alta de empleado
      4. Modificar datos de empleado
      5. Baja de empleado
      6. Listar empleados
      7. Ordenar empleados
      8. Guardar los datos de los empleados en el archivo data.csv (modo texto).
-     9. Guardar los datos de los empleados en el archivo data.csv (modo binario).
+     9. Guardar los datos de los empleados en el archivo data.bin (modo binario).
     10. Salir
 *****************************************************/
 
@@ -22,10 +22,13 @@ int menu();
 
 int main()
 {
+    int flag = 0;
+    int flagBin = 0;
     char salir;
     LinkedList* listaEmpleados = ll_newLinkedList();
+    LinkedList* listaEmpleadosBin = ll_newLinkedList();
 
-    if(listaEmpleados == NULL) {
+    if(listaEmpleados == NULL ||listaEmpleadosBin == NULL) {
         printf("ERROR: no se puedo asignar memoria. \n");
         system("pause");
         exit(EXIT_FAILURE);
@@ -35,10 +38,58 @@ int main()
         switch(menu())
         {
             case 1:
-                controller_loadFromText("data.csv",listaEmpleados);
+                // uso una copia del archivo para no modificar el original
+                if(ll_isEmpty(listaEmpleados)){
+                    if(controller_loadFromText("prueba.csv",listaEmpleados)){
+                        printf("Empleados cargados correctamente.\n\n");
+                        flag = 1;
+                    }
+                }
+                break;
+            case 2:
+                if(ll_isEmpty(listaEmpleados)){
+                    if(flagBin == 1){
+                        if(controller_loadFromBinary("data.bin", listaEmpleadosBin)){
+                            printf("Empleados cargados desde binario correctamente.\n\n");
+                        }
+                    } else {
+                        printf("Debe haber creado el archivo .bin para utlizar esta opcion.\n\n");
+                    }
+                }
+                break;
+            case 3:
+                if(controller_addEmployee(listaEmpleados)){
+                    printf("Empleado creado correctamente.\n\n");
+                }
+                break;
+            case 5:
+
                 break;
             case 6:
-                controller_ListEmployee(listaEmpleados);
+                if(flag == 1){
+                    controller_ListEmployee(listaEmpleados);
+                } else {
+                    printf("Debe cargar los empleados desde texto antes de continuar\n\n");
+                }
+                break;
+            case 8:
+                if(flag == 1){
+                    if(controller_saveAsText("prueba.csv", listaEmpleados)){
+                        printf("Empleados guardados a texto correctamente.\n\n");
+                    }
+                } else {
+                    printf("Debe cargar los empleados desde texto antes de continuar\n\n");
+                }
+                break;
+            case 9:
+                if(flag == 1){
+                    if(controller_saveAsBinary("data.bin", listaEmpleados)){
+                        printf("Empleados guardados a binario correctamente.\n\n");
+                    }
+                    flagBin = 1;
+                } else {
+                    printf("Debe cargar los empleados desde texto antes de continuar\n\n");
+                }
                 break;
             case 10:
                 printf("¿Seguro quiere salir? (s/n) ");

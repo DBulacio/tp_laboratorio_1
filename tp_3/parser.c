@@ -23,6 +23,10 @@ int parser_EmployeeFromText(FILE* f , LinkedList* list)
 
     Employee* aux = NULL;
 
+    if(f == NULL || list == NULL){
+        return todoOk;
+    }
+
     while(!feof(f)){
         cant = fscanf(f, "%[^,], %[^,], %[^,], %[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
         if(cant == 4){
@@ -51,8 +55,26 @@ int parser_EmployeeFromText(FILE* f , LinkedList* list)
  * \return int
  *
  */
-int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
+int parser_EmployeeFromBinary(FILE* f , LinkedList* list)
 {
+    int todoOk = 0;
+    int cant;
+    Employee* aux;
 
-    return 1;
+    if(f == NULL || list == NULL){
+        return todoOk;
+    }
+
+    while(!feof(f)){
+        aux = employee_new();
+        if(aux != NULL){
+            cant = fread(aux, sizeof(Employee), 1, f);
+            if(cant == 1){
+                ll_add(list, aux);
+                todoOk = 1;
+            }
+        }
+    }
+
+    return todoOk;
 }
