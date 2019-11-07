@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Employee.h"
 #include "parser.h"
@@ -62,12 +63,12 @@ int controller_loadFromBinary(char* path , LinkedList* list)
  * \return int
  *
  */
-int controller_addEmployee(LinkedList* list)
+int controller_addEmployee(LinkedList* list, int id)
 {
     int todoOk = 0;
-    int id;
     char nombre[20];
     int horas;
+    int fNombre = 0;
     float sueldo;
     Employee* nuevo = employee_new();
 
@@ -76,14 +77,30 @@ int controller_addEmployee(LinkedList* list)
     }
 
     /* --- PIDO LOS DATOS --- */
-    printf("Ingrese el id del empleado: ");
-    scanf("%d", &id);
     employee_setId(nuevo, id);
-    /* --- VALIDAR QUE NO EXISTA EL ID --- */
 
     printf("Ingrese el nombre del empleado: ");
     fflush(stdin);
     gets(nombre);
+    for(int i = 0 ; i < strlen(nombre) ; i++){
+        if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
+            fNombre = 1;
+            break;
+        }
+    }
+    while(fNombre == 1){
+        printf("ERROR. Ingrese el nombre del empleado: ");
+        fflush(stdin);
+        gets(nombre);
+        for(int i = 0 ; i < strlen(nombre) ; i++){
+            if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
+                fNombre = 1;
+                break;
+            } else if (i < strlen(nombre)){
+                fNombre = 0;
+            }
+        }
+    }
     employee_setNombre(nuevo, nombre);
 
     printf("Ingrese la cantidad de horas trabajadas: ");
@@ -114,7 +131,90 @@ int controller_addEmployee(LinkedList* list)
  */
 int controller_editEmployee(LinkedList* list)
 {
-    return 1;
+    int todoOk = 0;
+    int flag = 0;
+    int option;
+    int id;
+    char nombre[20];
+    int horas;
+    int fNombre = 0;
+    float sueldo;
+    Employee* aux = NULL;
+    Employee* emp = NULL;
+
+    if(list == NULL){
+        return todoOk;
+    }
+
+    printf("Ingrese el id del empleado: ");
+    scanf("%d", &id);
+    // VALIDAR
+
+    for(int i = 0 ; i < ll_len(list) ; i++){
+        aux = (Employee*) ll_get(list, i);
+        if(id == aux->id){
+            emp = aux;
+            flag = 1;
+            break;
+        }
+    }
+    if(flag == 0){
+        printf("No existe empleado con ese id. \n\n");
+        return todoOk;
+    }
+
+    printf("%4d %20s %6d %8.2f\n\n", emp->id, emp->nombre, emp->horasTrabajadas, emp->sueldo);
+    printf("1. Modificar nombre\n");
+    printf("2. Modificar horas trabajadas\n");
+    printf("3. Modificar sueldo\n");
+
+    while(option < 1 || option > 3){
+        printf("Ingrese la opcion: ");
+        scanf("%d", &option);
+        if(option == 1){
+            printf("Ingrese el nuevo nombre: ");
+            fflush(stdin);
+            gets(nombre);
+            for(int i = 0 ; i < strlen(nombre) ; i++){
+                if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
+                    fNombre = 1;
+                    break;
+                }
+            }
+            while(fNombre == 1){
+                printf("ERROR. Ingrese el nombre del empleado: ");
+                fflush(stdin);
+                gets(nombre);
+                for(int i = 0 ; i < strlen(nombre) ; i++){
+                    if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
+                        fNombre = 1;
+                        break;
+                    } else if (i < strlen(nombre)){
+                        fNombre = 0;
+                    }
+                }
+            }
+            employee_setNombre(emp, nombre);
+            todoOk = 1;
+
+        } else if(option == 2){
+            printf("Ingrese la nueva cantidad de horas trabajadas: ");
+            scanf("%d", &horas);
+            employee_setHorasTrabajadas(emp, horas);
+            todoOk = 1;
+
+        } else if(option == 3){
+            printf("Ingrese el nuevo sueldo: ");
+            scanf("%f", &sueldo);
+            employee_setSueldo(emp, sueldo);
+            todoOk = 1;
+
+        } else {
+            return todoOk;
+        }
+    }
+    return todoOk;
+
 }
 
 /** \brief Baja de empleado
@@ -127,13 +227,36 @@ int controller_editEmployee(LinkedList* list)
 int controller_removeEmployee(LinkedList* list)
 {
     int todoOk = 0;
-    Employee* aux = employee_new();
+    int id;
+    int index;
+    Employee* aux = NULL;
+    Employee* emp = NULL;
 
     if(list == NULL){
         return todoOk;
     }
 
     printf("Ingrese el id del empleado: ");
+    scanf("%d", &id);
+    // VALIDAR
+
+    for(int i = 0 ; i < ll_len(list) ; i++){
+        aux = (Employee*) ll_get(list, i);
+        if(id == aux->id){
+            emp = aux;
+            break;
+        }
+    }
+    index = ll_indexOf(list, emp);
+
+    printf("El empleado que selecciono es: \n");
+    printf("%4d %20s %6d %8.2f\n\n", emp->id, emp->nombre, emp->horasTrabajadas, emp->sueldo);
+
+    //VALIDACION
+
+    ll_remove(list, index);
+    // ¿Que pasa con la memoria en la posicion que libero? hago un free();
+    todoOk = 1;
 
     return todoOk;
 }

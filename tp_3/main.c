@@ -18,6 +18,8 @@
     10. Salir
 *****************************************************/
 
+// FALTA ORDENAR Y LAS VALIDACIONES
+
 int menu();
 
 int main()
@@ -27,6 +29,8 @@ int main()
     char salir;
     LinkedList* listaEmpleados = ll_newLinkedList();
     LinkedList* listaEmpleadosBin = ll_newLinkedList();
+    //int id;
+    //Employee emp = {1234, "Daniel", 20, 14000};
 
     if(listaEmpleados == NULL ||listaEmpleadosBin == NULL) {
         printf("ERROR: no se puedo asignar memoria. \n");
@@ -58,12 +62,15 @@ int main()
                 }
                 break;
             case 3:
-                if(controller_addEmployee(listaEmpleados)){
+                if(controller_addEmployee(listaEmpleados, ll_len(listaEmpleados))){
                     printf("Empleado creado correctamente.\n\n");
                 }
                 break;
+            case 4:
+                controller_editEmployee(listaEmpleados);
+                break;
             case 5:
-
+                controller_removeEmployee(listaEmpleados);
                 break;
             case 6:
                 if(flag == 1){

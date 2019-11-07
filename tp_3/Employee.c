@@ -75,11 +75,23 @@ int employee_setSueldo(Employee* this, int sueldo){
     return todoOk;
 }
 
+int employee_getId(Employee* this,int* id){
+    int todoOk = 0;
+
+    if(this == NULL || id == NULL){
+        return todoOk;
+    }
+
+    *id = this->id;
+    todoOk = 1;
+    return todoOk;
+}
+
 int employee_compareById(void* emp1, void* emp2){
     int id1;
     int id2;
-//    employee_getId((Employee*) emp1, &id1);
-//    employee_getId((Employee*) emp2, &id2);
+    employee_getId((Employee*) emp1, &id1);
+    employee_getId((Employee*) emp2, &id2);
 
     if(id1 > id2){
         return 1;
