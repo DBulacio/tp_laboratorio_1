@@ -67,8 +67,9 @@ int controller_addEmployee(LinkedList* list, int id)
 {
     int todoOk = 0;
     char nombre[20];
+    char buffer[20];
+    int bufferInt;
     int horas;
-    int fNombre = 0;
     float sueldo;
     Employee* nuevo = employee_new();
 
@@ -79,36 +80,46 @@ int controller_addEmployee(LinkedList* list, int id)
     /* --- PIDO LOS DATOS --- */
     employee_setId(nuevo, id);
 
-    printf("Ingrese el nombre del empleado: ");
+    printf("Ingrese el nombre: ");
     fflush(stdin);
     gets(nombre);
-    for(int i = 0 ; i < strlen(nombre) ; i++){
-        if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
-            fNombre = 1;
-            break;
-        }
-    }
-    while(fNombre == 1){
-        printf("ERROR. Ingrese el nombre del empleado: ");
+    bufferInt = atoi(nombre);
+
+    while(bufferInt != '\0'){
+        printf("ERROR. Ingrese el nombre: ");
         fflush(stdin);
         gets(nombre);
-        for(int i = 0 ; i < strlen(nombre) ; i++){
-            if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
-                fNombre = 1;
-                break;
-            } else if (i < strlen(nombre)){
-                fNombre = 0;
-            }
-        }
+        bufferInt = atoi(nombre);
     }
+
     employee_setNombre(nuevo, nombre);
 
     printf("Ingrese la cantidad de horas trabajadas: ");
-    scanf("%d", &horas);
+    fflush(stdin);
+    gets(buffer);
+    horas = atoi(buffer);
+
+    while(horas == '\0'){
+        printf("ERROR. Ingrese la cantidad de horas trabajadas: ");
+        fflush(stdin);
+        gets(buffer);
+        horas = atoi(buffer);
+    }
+
     employee_setHorasTrabajadas(nuevo, horas);
 
     printf("Ingrese el sueldo: ");
-    scanf("%f", &sueldo);
+    fflush(stdin);
+    gets(buffer);
+    sueldo = atof(buffer);
+
+    while(sueldo == '\0'){
+        printf("ERROR. Ingrese el sueldo: ");
+        fflush(stdin);
+        gets(buffer);
+        sueldo = atof(buffer);
+    }
+
     employee_setSueldo(nuevo, sueldo);
     /* --- TERMINO DE PEDIR LOS DATOS --- */
 
@@ -133,11 +144,12 @@ int controller_editEmployee(LinkedList* list)
 {
     int todoOk = 0;
     int flag = 0;
-    int option;
+    int option = 0;
     int id;
+    int bufferInt;
+    char buffer[20];
     char nombre[20];
     int horas;
-    int fNombre = 0;
     float sueldo;
     Employee* aux = NULL;
     Employee* emp = NULL;
@@ -147,8 +159,18 @@ int controller_editEmployee(LinkedList* list)
     }
 
     printf("Ingrese el id del empleado: ");
-    scanf("%d", &id);
+    fflush(stdin);
+    gets(buffer);
     // VALIDAR
+    id = atoi(buffer);
+
+    while(id == '\0'){
+        printf("ERROR. Ingrese el id del empleado: ");
+        fflush(stdin);
+        gets(buffer);
+        // VALIDAR
+        id = atoi(buffer);
+    }
 
     for(int i = 0 ; i < ll_len(list) ; i++){
         aux = (Employee*) ll_get(list, i);
@@ -170,44 +192,71 @@ int controller_editEmployee(LinkedList* list)
 
     while(option < 1 || option > 3){
         printf("Ingrese la opcion: ");
-        scanf("%d", &option);
+        fflush(stdin);
+        gets(buffer);
+        // VALIDAR
+        option = atoi(buffer);
+
+        while(option == '\0'){
+            printf("Ingrese la opcion: ");
+            fflush(stdin);
+            gets(buffer);
+            option = atoi(buffer);
+        }
+
         if(option == 1){
             printf("Ingrese el nuevo nombre: ");
             fflush(stdin);
             gets(nombre);
-            for(int i = 0 ; i < strlen(nombre) ; i++){
-                if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
-                    fNombre = 1;
-                    break;
-                }
-            }
-            while(fNombre == 1){
-                printf("ERROR. Ingrese el nombre del empleado: ");
+            bufferInt = atoi(nombre);
+
+            while(bufferInt != '\0'){
+                printf("ERROR. Ingrese el nuevo nombre: ");
                 fflush(stdin);
                 gets(nombre);
-                for(int i = 0 ; i < strlen(nombre) ; i++){
-                    if(nombre[i] == '0' || nombre[i] == '1' || nombre[i] == '2' || nombre[i] == '3' || nombre[i] == '4' || nombre[i] == '5' || nombre[i] == '6' || nombre[i] == '7' || nombre[i] == '8' || nombre[i] == '9'){
-                        fNombre = 1;
-                        break;
-                    } else if (i < strlen(nombre)){
-                        fNombre = 0;
-                    }
-                }
+                bufferInt = atoi(nombre);
             }
+
             employee_setNombre(emp, nombre);
             todoOk = 1;
 
         } else if(option == 2){
             printf("Ingrese la nueva cantidad de horas trabajadas: ");
-            scanf("%d", &horas);
+            fflush(stdin);
+            gets(buffer);
+            horas = atoi(buffer);
+
+            while(horas == '\0'){
+                printf("ERROR. Ingrese la nueva cantidad de horas trabajadas: ");
+                fflush(stdin);
+                gets(buffer);
+                horas = atoi(buffer);
+            }
+
             employee_setHorasTrabajadas(emp, horas);
             todoOk = 1;
 
         } else if(option == 3){
             printf("Ingrese el nuevo sueldo: ");
-            scanf("%f", &sueldo);
-            employee_setSueldo(emp, sueldo);
-            todoOk = 1;
+            fflush(stdin);
+            gets(buffer);
+            sueldo = atof(buffer);fflush(stdin);
+            gets(buffer);
+            sueldo = atoi(buffer);
+
+            while(sueldo == '\0'){
+                printf("ERROR. Ingrese el nuevo sueldo: ");
+                fflush(stdin);
+                gets(buffer);
+                sueldo = atoi(buffer);
+            }
+
+            while(sueldo == '\0'){
+                printf("ERROR. Ingrese el nuevo sueldo: ");
+                fflush(stdin);
+                gets(buffer);
+                sueldo = atof(buffer);
+            }
 
         } else {
             return todoOk;
@@ -229,6 +278,9 @@ int controller_removeEmployee(LinkedList* list)
     int todoOk = 0;
     int id;
     int index;
+    int flag = 0;
+    char salir;
+    char buffer[20];
     Employee* aux = NULL;
     Employee* emp = NULL;
 
@@ -237,25 +289,46 @@ int controller_removeEmployee(LinkedList* list)
     }
 
     printf("Ingrese el id del empleado: ");
-    scanf("%d", &id);
-    // VALIDAR
+    fflush(stdin);
+    gets(buffer);
+    id = atoi(buffer);
+
+    while(id == '\0'){
+        printf("ERROR. Ingrese el id del empleado: ");
+        fflush(stdin);
+        gets(buffer);
+        id = atoi(buffer);
+    }
 
     for(int i = 0 ; i < ll_len(list) ; i++){
         aux = (Employee*) ll_get(list, i);
         if(id == aux->id){
             emp = aux;
+            flag = 1;
             break;
         }
     }
+    if(flag == 0){
+        printf("El id no existe\n");
+        return todoOk;
+    }
+
     index = ll_indexOf(list, emp);
 
     printf("El empleado que selecciono es: \n");
     printf("%4d %20s %6d %8.2f\n\n", emp->id, emp->nombre, emp->horasTrabajadas, emp->sueldo);
 
-    //VALIDACION
+    printf("Seguro desea eliminar este empleado? (s/n) ");
+    fflush(stdin);
+    salir = getchar();
+    if(salir == 's'){
+        printf("\n-----EMPLEADO ELIMINADO-----\n\n");
+    } else {
+        printf("Baja cancelada\n");
+        return todoOk;
+    }
 
     ll_remove(list, index);
-    // ¿Que pasa con la memoria en la posicion que libero? hago un free();
     todoOk = 1;
 
     return todoOk;
@@ -298,7 +371,44 @@ int controller_ListEmployee(LinkedList* list)
  */
 int controller_sortEmployee(LinkedList* list)
 {
-    return 1;
+    int todoOk = 0;
+    int option;
+
+    if(list == NULL){
+        return todoOk;
+    }
+
+    system("cls");
+
+    printf("1. Ordenar por id\n");
+    printf("2. Ordenar por nombre\n");
+    printf("3. Ordenar por horas\n");
+    printf("4. Ordenar por sueldo\n");
+
+    printf("Ingrese una opcion: ");
+    scanf("%d", &option);
+
+    while(option < 1 || option > 4){
+        printf("Ingrese una opcion: ");
+        scanf("%d", &option);
+    }
+
+    if(option == 1){
+        ll_sort(list, employee_compareById, 0);
+    }
+    if(option == 2){
+        ll_sort(list, employee_compareByName, 0);
+    }
+    if(option == 3){
+        ll_sort(list, employee_compareByHour, 0);
+    }
+    if(option == 4){
+        ll_sort(list, employee_compareBySalary, 0);
+    }
+
+    printf("Empleados ordenados correctamente\n\n");
+    todoOk = 1;
+    return todoOk;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).

@@ -44,7 +44,7 @@ int main()
             case 1:
                 // uso una copia del archivo para no modificar el original
                 if(ll_isEmpty(listaEmpleados)){
-                    if(controller_loadFromText("prueba.csv",listaEmpleados)){
+                    if(controller_loadFromText("data.csv",listaEmpleados)){
                         printf("Empleados cargados correctamente.\n\n");
                         flag = 1;
                     }
@@ -67,10 +67,16 @@ int main()
                 }
                 break;
             case 4:
-                controller_editEmployee(listaEmpleados);
+                if(flag == 1){
+
+                    controller_editEmployee(listaEmpleados);
+                }
                 break;
             case 5:
-                controller_removeEmployee(listaEmpleados);
+                if(flag == 1){
+
+                    controller_removeEmployee(listaEmpleados);
+                }
                 break;
             case 6:
                 if(flag == 1){
@@ -79,9 +85,15 @@ int main()
                     printf("Debe cargar los empleados desde texto antes de continuar\n\n");
                 }
                 break;
+            case 7:
+                if(flag == 1){
+
+                    controller_sortEmployee(listaEmpleados);
+                }
+                break;
             case 8:
                 if(flag == 1){
-                    if(controller_saveAsText("prueba.csv", listaEmpleados)){
+                    if(controller_saveAsText("data.csv", listaEmpleados)){
                         printf("Empleados guardados a texto correctamente.\n\n");
                     }
                 } else {

@@ -125,7 +125,7 @@
 
 1572880398 c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\controller.h
 
-1573090233 source:c:\users\danie\desktop\facultad\prog_lab\tp_3\main.c
+1573179175 source:c:\users\danie\desktop\facultad\prog_lab\tp_3\main.c
 	<stdio.h>
 	<stdlib.h>
 	"LinkedList.h"
@@ -134,9 +134,9 @@
 
 1572880827 c:\users\danie\desktop\facultad\prog_lab\tp_3\linkedlist.h
 
-1572921219 c:\users\danie\desktop\facultad\prog_lab\tp_3\controller.h
+1573179160 c:\users\danie\desktop\facultad\prog_lab\tp_3\controller.h
 
-1572880827 c:\users\danie\desktop\facultad\prog_lab\tp_3\employee.h
+1573176450 c:\users\danie\desktop\facultad\prog_lab\tp_3\employee.h
 
 1572880827 source:c:\users\danie\desktop\facultad\prog_lab\tp_3\parser.c
 	<stdio.h>
@@ -145,7 +145,7 @@
 	"LinkedList.h"
 	"Employee.h"
 
-1573090965 source:c:\users\danie\desktop\facultad\prog_lab\tp_3\controller.c
+1573181443 source:c:\users\danie\desktop\facultad\prog_lab\tp_3\controller.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -155,7 +155,7 @@
 
 1572880827 c:\users\danie\desktop\facultad\prog_lab\tp_3\parser.h
 
-1572919209 source:c:\users\danie\desktop\facultad\prog_lab\tp_3\employee.c
+1573179145 source:c:\users\danie\desktop\facultad\prog_lab\tp_3\employee.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
