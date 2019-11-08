@@ -89,27 +89,28 @@
 
 1572814183 c:\users\danie\desktop\facultad\prog_lab\tp_3\win_64\parser.h
 
-1572880664 source:c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\controller.c
+1573181770 source:c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\controller.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"LinkedList.h"
 	"Employee.h"
 	"parser.h"
 
-1572819891 c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\linkedlist.h
+1573181770 c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\linkedlist.h
 
-1572880664 c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\employee.h
+1573181770 c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\employee.h
 
-1572872766 c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\parser.h
+1573181770 c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\parser.h
 
-1572880670 source:c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\employee.c
+1573181770 source:c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\employee.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"LinkedList.h"
 	"Employee.h"
 
-1572873794 source:c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\parser.c
+1573181770 source:c:\users\alumno\desktop\tp_laboratorio_1-master\tp_3\parser.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

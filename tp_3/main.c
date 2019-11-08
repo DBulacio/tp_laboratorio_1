@@ -115,6 +115,7 @@ int main()
                 fflush(stdin);
                 salir = getchar();
                 if(salir == 's'){
+                    ll_deleteLinkedList(listaEmpleados);
                     printf("\n-----HASTA LUEGO!-----\n\n");
                 }
                 break;
