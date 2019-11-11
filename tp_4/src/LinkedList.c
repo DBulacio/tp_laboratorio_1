@@ -62,23 +62,27 @@ static Node* getNode(LinkedList* this, int nodeIndex)
     if(this != NULL && nodeIndex >= 0 && nodeIndex < ll_len(this)){
         nodoAnterior  = this->pFirstNode;
 
-        if(nodeIndex == 0){
-            nodo = nodoAnterior;
-        } else {
-            for(int i = 1 ; i < ll_len(this) ; i++){
-                nodoSiguiente = nodoAnterior->pNextNode;
+        nodo = (Node*) malloc(sizeof(Node));
 
-                if(nodeIndex == i - 1){
-                    nodo = nodoSiguiente;
-                    break;
+        if(nodo != NULL){
+            if(nodeIndex == 0){
+                nodo = nodoAnterior;
+            } else {
+                for(int i = 1 ; i < ll_len(this) ; i++){
+                    nodoSiguiente = nodoAnterior->pNextNode;
+
+                    if(nodeIndex == i - 1){
+                        nodo = nodoSiguiente;
+                        break;
+                    }
+
+                    if(nodeIndex == ll_len(this) - 1){
+                        nodo = nodoAnterior->pNextNode;
+                        break;
+                    }
+
+                    nodoAnterior = nodoSiguiente;
                 }
-
-                if(nodeIndex == ll_len(this) - 1){
-                    nodo = nodoAnterior->pNextNode;
-                    break;
-                }
-
-                nodoAnterior = nodoSiguiente;
             }
         }
     }
@@ -115,7 +119,7 @@ static int addNode(LinkedList* this, int nodeIndex, void* pElement)
     Node* nuevoNodo = NULL;
     Node* aux = NULL;
 
-    if(this != NULL && nodeIndex >= 0 && nodeIndex <= ll_len(this) && ll_len(this) > -1){
+    if(this != NULL && nodeIndex >= 0 && nodeIndex <= ll_len(this) && ll_len(this) != -1){
 
         nuevoNodo = (Node*) malloc(sizeof(Node));
 
@@ -127,9 +131,10 @@ static int addNode(LinkedList* this, int nodeIndex, void* pElement)
                 nuevoNodo->pNextNode = this->pFirstNode;
                 this->pFirstNode = nuevoNodo;
                 this->size = (this->size) + 1;
-                returnAux = 0;
 
-            } /*else if(nodeIndex > 0) {
+            } else if(nodeIndex > 0) {
+
+                aux = (Node*) malloc(sizeof(Node));
 
                 aux = getNode(this, nodeIndex);
                 if(aux != NULL){
@@ -137,12 +142,11 @@ static int addNode(LinkedList* this, int nodeIndex, void* pElement)
                     nuevoNodo->pNextNode = aux->pNextNode;
                     aux->pNextNode = nuevoNodo;
                     this->size = (this->size) + 1;
-                    returnAux = 0;
 
                 }
             }
-            */
         }
+        returnAux = 0;
     }
 
     return returnAux;
