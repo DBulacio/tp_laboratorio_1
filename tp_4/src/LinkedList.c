@@ -68,16 +68,17 @@ static Node* getNode(LinkedList* this, int nodeIndex)
             if(nodeIndex == 0){
                 nodo = nodoAnterior;
             } else {
+
                 for(int i = 1 ; i < ll_len(this) ; i++){
                     nodoSiguiente = nodoAnterior->pNextNode;
 
-                    if(nodeIndex == i - 1){
+                    if(nodeIndex == i){
                         nodo = nodoSiguiente;
                         break;
                     }
 
                     if(nodeIndex == ll_len(this) - 1){
-                        nodo = nodoAnterior->pNextNode;
+                        nodo = nodoAnterior;
                         break;
                     }
 
