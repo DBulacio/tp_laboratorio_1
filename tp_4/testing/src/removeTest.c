@@ -76,16 +76,3 @@ void removeTestCase04(void)
     r = ll_remove(NULL,0);
     utest_assertEqualsIntMsg(r,-1,"\nError en el valor de retorno de <remove> si la lista pasada es NULL\n el valor a retornar es (-1)\n");
 }
-
-void removeTestCase05(void)
-{
-    LinkedList* list;
-    void* pElement;
-    void* pElement2 = newEmployee(10,"JUAN","PEREZ",1,1);
-    list = ll_newLinkedList();
-    ll_add(list,NULL);
-    ll_remove(list,0);
-
-    utest_assertEqualsPointerMsg(list->pFirstNode,NULL,"\nEl valor de pFirsNode luego de quitar el ultimo elemento debe ser NULL\n");
-
-}

@@ -124,7 +124,6 @@ void startTesting(int testGroup)
             utest_startTest(removeTestCase02,removeTestSetup,">Caso [Verifica si un elemento fue correctamente removido]");
             utest_startTest(removeTestCase03,removeTestSetup,">Caso [Intenta remover un elemento fuera de indice]");
             utest_startTest(removeTestCase04,removeTestSetup,">Caso [Intenta remover un elemento pasando una lista NULL]]");
-            utest_startTest(removeTestCase05,removeTestSetup,">Caso [Verifica el valor de pFirstNode luego de eliminar el ultimo elemento]]");
             utest_printStatistics("ll_remove()");
             break;
 

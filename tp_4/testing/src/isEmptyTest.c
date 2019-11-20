@@ -38,7 +38,7 @@ void isEmptyTestCase01(void)
     int r;
     list = ll_newLinkedList();
     r = ll_isEmpty(list);
-    utest_assertEqualsIntMsg(r,1,"\nError en el valor de retorno de <isEmpty> si los parametros son correctos y \nla lista NO tiene elementos debe retornar 1\n");
+    utest_assertEqualsIntMsg(r,1,"\nError en el valor de retorno de <isEmpty> si los parametros son correctos y \nla lista NO tiene elementos debe retornar 0\n");
     ll_add(list,NULL);
     r = ll_isEmpty(list);
     utest_assertEqualsIntMsg(r,0,"\nError en el valor de retorno de <isEmpty> si los parametros son correctos y \nla lista tiene elementos debe retornar 0\n");
